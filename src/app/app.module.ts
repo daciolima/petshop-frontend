@@ -10,6 +10,7 @@ import { SignupPageComponent } from './pages/accounts/signup-page/signup-page.co
 import { PetPageComponent } from './pages/accounts/pet-page/pet-page.component';
 import { ProductPageComponent } from './pages/store/product-page/product-page.component';
 import { CartPageComponent } from './pages/store/cart-page/cart-page.component';
+import { FramePageComponent } from './pages/master/frame.page';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CartPageComponent } from './pages/store/cart-page/cart-page.component';
     PetPageComponent,
     ProductPageComponent,
     CartPageComponent,
+    FramePageComponent
   ],
   imports: [
     BrowserModule,

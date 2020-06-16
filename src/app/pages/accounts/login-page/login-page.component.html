@@ -19,13 +19,13 @@
             <input class="uk-input uk-form-large" formControlName="password" type="password" placeholder="Senha">
           </div>
           <div class="uk-margin uk-text-right">
-            <button class="uk-button uk-button-default">Entrar</button>
+            <a href="/" class="uk-button uk-button-default">Entrar</a>
           </div>
         </div>
       </form>
   
       <p class="uk-text-center">
-        <a href="#" class="uk-button uk-width-1-1 uk-button-large uk-button-primary uk-margin-small-bottom">Quero me
+        <a [routerLink]="['/signup']" class="uk-button uk-width-1-1 uk-button-large uk-button-primary uk-margin-small-bottom">Quero me
           Cadastrar</a>
         <br>
         <a href="#"  class="uk-button uk-button-link">Esqueci minha senha</a>
