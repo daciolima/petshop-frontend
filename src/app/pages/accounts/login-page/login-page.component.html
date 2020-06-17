@@ -6,20 +6,19 @@
   
       
   
-      <form>
+      <form [formGroup]="form">
         <div class="uk-card uk-card-primary uk-card-body uk-box-shadow-small">
           <h3 class="uk-card-title">Autentique-se</h3>
           <div class="uk-margin">
             <input class="uk-input uk-form-large" 
-            formControlName="username" type="text" 
-            placeholder="CPF"
-            mask="###.###.###-##">
+            formControlName="username" type="text" maxlength="11" placeholder="CPF" mask="###.###.###-##"
+            [ngClass]="{'uk-form-danger': (form.controls.username.invalid && !form.controls.username.pristine)}">
           </div>
           <div class="uk-margin">
             <input class="uk-input uk-form-large" formControlName="password" type="password" placeholder="Senha">
           </div>
           <div class="uk-margin uk-text-right">
-            <a href="/" class="uk-button uk-button-default">Entrar</a>
+            <button class="uk-button uk-button-default" [disabled]="form.invalid">Entrar</button>
           </div>
         </div>
       </form>

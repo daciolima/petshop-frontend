@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
 
-  ngOnInit(): void {
+
+  constructor(
+    private serviceData: DataService,
+    private fb: FormBuilder
+  ) { 
+
+    this.form = this.fb.group({
+      username: ['', Validators.compose([
+        Validators.minLength(11),
+        Validators.maxLength(11),
+        Validators.required
+      ])],
+      password: ['', Validators.compose([
+        Validators.minLength(3),
+        Validators.maxLength(15),
+        Validators.required
+      ])]
+
+    })
+
+  }
+
+  ngOnInit() {
   }
 
 }

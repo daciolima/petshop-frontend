@@ -21,7 +21,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'account',
+    path: 'accounts',
     component: FramePageComponent,
     children: [
       { path: 'pets', component: PetsPageComponent },
