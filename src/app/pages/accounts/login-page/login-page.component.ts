@@ -36,4 +36,17 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() {
+    this.serviceData
+    .authenticate(this.form.value)
+    .subscribe((data) => {
+      console.log(data);
+    },
+    (err) => {
+      console.log(err);
+    }
+    );
+
+  }
+
 }
