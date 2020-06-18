@@ -10,12 +10,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
 
   public form: FormGroup;
+  public busy: boolean = false;
 
 
   constructor(
     private serviceData: DataService,
     private fb: FormBuilder
-  ) { 
+  ) {
 
     this.form = this.fb.group({
       username: ['', Validators.compose([
@@ -29,21 +30,41 @@ export class LoginPageComponent implements OnInit {
         Validators.required
       ])]
 
-    })
+    });
 
   }
 
   ngOnInit() {
+    const token = localStorage.getItem('petshop.token');
+    if (token) {
+      this.busy=true;
+      this
+        .serviceData
+        .refreshToken()
+        .subscribe(
+          (data: any) => {
+            localStorage.setItem('petshop.token', data.token);
+            this.busy = false;
+          },
+          (err) => {
+            localStorage.clear();
+            this.busy = false;
+          }
+        );
+    }
   }
 
   submit() {
+    this.busy = true;
     this.serviceData
     .authenticate(this.form.value)
-    .subscribe((data) => {
-      console.log(data);
+    .subscribe((data: any) => {
+      localStorage.setItem('petshop.token', data.token);
+      this.busy = false;
     },
     (err) => {
       console.log(err);
+      this.busy = false;
     }
     );
 

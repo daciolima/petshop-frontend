@@ -13,6 +13,7 @@ import { ProductPageComponent } from './pages/store/product-page/product-page.co
 import { CartPageComponent } from './pages/store/cart-page/cart-page.component';
 import { FramePageComponent } from './pages/master/frame.page';
 import { ProductCardComponent } from './components/store/product-card/product-card.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ProductCardComponent } from './components/store/product-card/product-ca
     ProductPageComponent,
     CartPageComponent,
     FramePageComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
