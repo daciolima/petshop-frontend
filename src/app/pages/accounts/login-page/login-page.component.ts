@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CustomValidator } from 'src/app/validators/custom.validator';
+import { Security } from 'src/app/utils/security.util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -15,14 +18,16 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private serviceData: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
 
     this.form = this.fb.group({
       username: ['', Validators.compose([
-        Validators.minLength(11),
-        Validators.maxLength(11),
-        Validators.required
+        Validators.minLength(14),
+        Validators.maxLength(14),
+        Validators.required,
+        CustomValidator.isCpf()
       ])],
       password: ['', Validators.compose([
         Validators.minLength(3),
@@ -35,16 +40,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const token = localStorage.getItem('petshop.token');
+    const token = Security.getToken();
     if (token) {
-      this.busy=true;
+      this.busy = true;
       this
         .serviceData
         .refreshToken()
         .subscribe(
           (data: any) => {
-            localStorage.setItem('petshop.token', data.token);
             this.busy = false;
+            this.setUser(data.customer, data.token);
           },
           (err) => {
             localStorage.clear();
@@ -59,15 +64,19 @@ export class LoginPageComponent implements OnInit {
     this.serviceData
     .authenticate(this.form.value)
     .subscribe((data: any) => {
-      localStorage.setItem('petshop.token', data.token);
       this.busy = false;
+      this.setUser(data.customer, data.token);
     },
     (err) => {
       console.log(err);
       this.busy = false;
     }
     );
+  }
 
+  setUser(user, token) {
+    Security.set(user, token);
+    this.router.navigate(['/'])
   }
 
 }
