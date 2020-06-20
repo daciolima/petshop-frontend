@@ -9,6 +9,7 @@ import { ResetPasswordPageComponent } from './pages/accounts/reset-password-page
 import { SignupPageComponent } from './pages/accounts/signup-page/signup-page.component';
 import { AuthService } from './services/auth.service';
 import { CheckoutPageComponent } from './pages/store/checkout-page/checkout-page.component';
+import { ProfilePageComponent } from './pages/accounts/profile-page/profile-page.component';
 
 
 const routes: Routes = [
@@ -17,16 +18,19 @@ const routes: Routes = [
   {
     path: '',
     component: FramePageComponent,
+    // canActivate: [AuthService]
     children: [
       { path: '', component: ProductPageComponent },
-      { path: 'cart', component: CartPageComponent, canActivate: [AuthService] },
-      { path: 'checkout', component: CheckoutPageComponent, canActivate: [AuthService] },
+      { path: 'cart', component: CartPageComponent, canActivate: [AuthService]},
+      { path: 'checkout', component: CheckoutPageComponent, canActivate: [AuthService]},
     ]
   },
   {
     path: 'accounts',
     component: FramePageComponent,
+    canActivate: [AuthService],
     children: [
+      { path: '', component: ProfilePageComponent },
       { path: 'pets', component: PetsPageComponent },
     ]
   },
