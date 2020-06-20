@@ -8,7 +8,8 @@
         {{ product.title }}
         {{ product.category }}
       </p>
-      <button class="uk-button uk-button-default">
+      <button class="uk-button uk-button-default"
+        (click)="addToCart()">
         <span class="uk-icon uk-margin-small-right" uk-icon="icon: cart"></span>
         Adicionar
       </button>
